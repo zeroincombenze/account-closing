@@ -23,7 +23,7 @@
 
 {
     'name': 'Account Cut-off Base',
-    'version': '0.1',
+    'version': '8.0.0.1.0',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Base module for Account Cut-offs',
@@ -47,7 +47,8 @@ for any help or question about this module.
         'company_view.xml',
         'account_cutoff_view.xml',
         'security/ir.model.access.csv',
+        'security/account_cutoff_base_security.xml',
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
