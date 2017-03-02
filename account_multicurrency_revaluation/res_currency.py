@@ -21,8 +21,8 @@
 
 import time
 
-from osv import osv
-from tools.translate import _
+from openerp.osv import osv
+from openerp.tools.translate import _
 
 
 class res_currency(osv.osv):
@@ -48,5 +48,6 @@ class res_currency(osv.osv):
         else:
             return super(res_currency, self)._get_conversion_rate(
                 cr, uid, from_currency, to_currency, context=context)
+
 
 res_currency()

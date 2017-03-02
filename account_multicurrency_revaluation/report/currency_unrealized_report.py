@@ -20,7 +20,7 @@
 
 from report import report_sxw
 from openerp.tools.translate import _
-import pooler
+from openerp import pooler
 
 
 class ShellAccount(object):
@@ -29,6 +29,7 @@ class ShellAccount(object):
     # Browsing an account account object is not efficient
     # beacause of function fields
     # This object aim to be easly transpose to account account if needed
+
     def exists(self):
         return True
 
@@ -240,6 +241,7 @@ class CurrencyUnrealizedReport(report_sxw.rml_parse):
                 acc.compute_totals()
         return super(CurrencyUnrealizedReport, self).set_context(
             objects, data, ids, report_type=None)
+
 
 report_sxw.report_sxw(
     'report.currency_unrealized', 'account.account',
