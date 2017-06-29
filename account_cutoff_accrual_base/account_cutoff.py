@@ -22,7 +22,7 @@
 
 
 from openerp.osv import orm, fields
-import openerp.addons.decimal_precision as dp
+import decimal_precision as dp
 
 
 class account_cutoff(orm.Model):
