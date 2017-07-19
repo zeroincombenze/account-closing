@@ -3,19 +3,21 @@
 [![Coverage Status](https://coveralls.io/repos/github/zeroincombenze/account-closing/badge.svg?branch=8.0)](https://coveralls.io/github/zeroincombenze/account-closing?branch=8.0)
 [![codecov](https://codecov.io/gh/zeroincombenze/account-closing/branch/8.0/graph/badge.svg)](https://codecov.io/gh/zeroincombenze/account-closing/branch/8.0)
 [![OCA_project](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-oca-8.svg)](https://github.com/OCA/account-closing/tree/8.0)
-[![Tech Doc](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-docs-8.svg)](http://wiki.zeroincombenze.org/en/Odoo/dev/8.0)
-[![Help](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-help-8.svg)](http://wiki.zeroincombenze.org/en/Odoo/8.0/account-)
+[![Tech Doc](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-docs-8.svg)](http://wiki.zeroincombenze.org/en/Odoo/8.0/dev)
+[![Help](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-help-8.svg)](http://wiki.zeroincombenze.org/en/Odoo/8.0/man/FI)
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-8.svg)](http://erp8.zeroincombenze.it)
 
+
+[![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
+================================================================================================
+
 Account Closing
-===============
 
 This project aim to deal with modules related to manage account closing.
 
 [//]: # (addons)
 
 Available addons
-----------------
 addon | version | summary
 --- | --- | ---
 [account_cutoff_accrual_base](account_cutoff_accrual_base/) | 8.0.0.1.0 | Base module for accrued expenses and revenues
@@ -27,7 +29,6 @@ addon | version | summary
 
 
 Unported addons
----------------
 addon | version | summary
 --- | --- | ---
 [account_multicurrency_revaluation_report](account_multicurrency_revaluation_report/) | 8.0.1.0.0 (unported) | Module for printing reports that completes the module Multicurrency Revaluation
