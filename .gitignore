@@ -58,3 +58,4 @@ stdout.log
 *.oca
 *.z0i
 7.0/
+.gitrepname
