@@ -33,4 +33,19 @@ is mainly designed for Italian law and markeplace.
 Everytime, every Odoo DB and customized code can be deployed on local server too.
 
 [//]: # (end copyright)
+[//]: # (addons)
+
+
+Available addons
+----------------
+addon | version | OCA version | summary
+--- | --- | --- | ---
+[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 0.1 |  N/D  | Base module for accrued expenses and revenues
+[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 0.1 |  N/D  | Accrued Expense & Accrued Revenue from Pickings
+[account_cutoff_base](account_cutoff_base/) | 0.1 |  N/D  | Base module for Account Cut-offs
+[account_cutoff_prepaid](account_cutoff_prepaid/) | 0.1 |  N/D  | Prepaid Expense, Prepaid Revenue
+[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 6.1 |  N/D  | Multicurrency revaluation
+
+[//]: # (end addons)
+
 [![chat with us](https://www.shs-av.com/wp-content/chat_with_us.gif)](https://tawk.to/85d4f6e06e68dd4e358797643fe5ee67540e408b)
