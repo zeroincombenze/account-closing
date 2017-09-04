@@ -8,7 +8,7 @@
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-10.svg)](http://erp10.zeroincombenze.it)
 
 
-[![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
+[![en](https://github.com/zeroincombenze/grymb/blob/master/flags/en_US.png)](https://www.facebook.com/groups/openerp.italia/)
 
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
 ================================================================
@@ -29,10 +29,14 @@ If you use this module, you may also be interested in 2 other modules:
 Installation
 ------------
 
+
 Configuration
 -------------
 
+
 Usage
+-----
+
 -----
 
 =====
@@ -46,10 +50,12 @@ Known issues / Roadmap
 ----------------------
 
 
+
 * Add the start/end date field on the Qweb invoice report.
 
 Bug Tracker
 -----------
+
 
 
 Bugs are tracked on `GitHub Issues
@@ -61,9 +67,12 @@ Credits
 -------
 
 
+
 [![Odoo Italia Associazione]]
 
+
 ### Contributors
+
 
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
@@ -71,6 +80,8 @@ Credits
 ### Funders
 
 ### Maintainer
+
+
 
 
 .. image:: https://odoo-community.org/logo.png

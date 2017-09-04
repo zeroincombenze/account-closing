@@ -8,7 +8,7 @@
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-10.svg)](http://erp10.zeroincombenze.it)
 
 
-[![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
+[![en](https://github.com/zeroincombenze/grymb/blob/master/flags/en_US.png)](https://www.facebook.com/groups/openerp.italia/)
 
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
 ================================================================
@@ -31,8 +31,10 @@ appropriate cut-off journal entry.
 Installation
 ------------
 
+
 Configuration
 -------------
+
 
 
 On the form view of the company, in the *Configuration* tab, there is a *Cut-offs* section where you can configure:
@@ -42,6 +44,8 @@ On the form view of the company, in the *Configuration* tab, there is a *Cut-off
 * the *Default Account for Prepaid Expense*.
 
 Usage
+-----
+
 -----
 
 =====
@@ -73,8 +77,10 @@ revenue that you already have in your source journals for that period.
 Known issues / Roadmap
 ----------------------
 
+
 Bug Tracker
 -----------
+
 
 
 Bugs are tracked on `GitHub Issues
@@ -86,9 +92,12 @@ Credits
 -------
 
 
+
 [![Odoo Italia Associazione]]
 
+
 ### Contributors
+
 
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
@@ -97,6 +106,8 @@ Credits
 ### Funders
 
 ### Maintainer
+
+
 
 
 .. image:: https://odoo-community.org/logo.png
