@@ -8,7 +8,7 @@
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-9.svg)](http://erp9.zeroincombenze.it)
 
 
-[![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
+[![en](https://github.com/zeroincombenze/grymb/blob/master/flags/en_US.png)](https://www.facebook.com/groups/openerp.italia/)
 ================================================================================================
 ================================================================================================
 
@@ -18,21 +18,24 @@ This project aim to deal with modules related to manage account closing.
 
 [//]: # (addons)
 
+
 Available addons
-addon | version | summary
---- | --- | ---
-[account_cutoff_base](account_cutoff_base/) | 9.0.1.0.0 | Base module for Account Cut-offs
-[account_cutoff_prepaid](account_cutoff_prepaid/) | 9.0.1.0.0 | Prepaid Expense, Prepaid Revenue
-[account_invoice_start_end_dates](account_invoice_start_end_dates/) | 9.0.1.0.0 | Adds start/end dates on invoice lines and move lines
-[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 9.0.1.0.0 | Manage revaluation for multicurrency environment
-[account_multicurrency_revaluation_report](account_multicurrency_revaluation_report/) | 9.0.1.0.0 | Module for printing reports that completes the module Multicurrency Revaluation
+----------------
+addon | version | OCA version | summary
+--- | --- | --- | ---
+[account_cutoff_base](account_cutoff_base/) | 9.0.1.0.0 | :repeat: | Base module for Account Cut-offs
+[account_cutoff_prepaid](account_cutoff_prepaid/) | 9.0.1.0.0 | :repeat: | Prepaid Expense, Prepaid Revenue
+[account_invoice_start_end_dates](account_invoice_start_end_dates/) | 9.0.1.0.0 | :repeat: | Adds start/end dates on invoice lines and move lines
+[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 9.0.1.0.0 | :repeat: | Manage revaluation for multicurrency environment
+[account_multicurrency_revaluation_report](account_multicurrency_revaluation_report/) | 9.0.1.0.0 | :repeat: | Module for printing reports that completes the module Multicurrency Revaluation
 
 
 Unported addons
-addon | version | summary
---- | --- | ---
-[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 8.0.0.1.0 (unported) | Base module for accrued expenses and revenues
-[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 0.1 (unported) | Accrued Expense & Accrued Revenue from Pickings
+---------------
+addon | version | OCA version | summary
+--- | --- | --- | ---
+[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 8.0.0.1.0 (unported) | :repeat: | Base module for accrued expenses and revenues
+[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 0.1 (unported) | :repeat: | Accrued Expense & Accrued Revenue from Pickings
 
 [//]: # (end addons)
 
