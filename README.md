@@ -8,7 +8,7 @@
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-7.svg)](http://erp7.zeroincombenze.it)
 
 
-[![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
+[![en](https://github.com/zeroincombenze/grymb/blob/master/flags/en_US.png)](https://www.facebook.com/groups/openerp.italia/)
 ================================================================================================
 ================================================================================================
 
@@ -40,11 +40,11 @@ Available addons
 ----------------
 addon | version | OCA version | summary
 --- | --- | --- | ---
-[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 0.1 |  N/D  | Base module for accrued expenses and revenues
-[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 0.1 |  N/D  | Accrued Expense & Accrued Revenue from Pickings
-[account_cutoff_base](account_cutoff_base/) | 0.1 |  N/D  | Base module for Account Cut-offs
-[account_cutoff_prepaid](account_cutoff_prepaid/) | 0.1 |  N/D  | Prepaid Expense, Prepaid Revenue
-[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 6.1 |  N/D  | Multicurrency revaluation
+[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 0.1 | :repeat: | Base module for accrued expenses and revenues
+[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 0.1 | :repeat: | Accrued Expense & Accrued Revenue from Pickings
+[account_cutoff_base](account_cutoff_base/) | 0.1 | :repeat: | Base module for Account Cut-offs
+[account_cutoff_prepaid](account_cutoff_prepaid/) | 0.1 | :repeat: | Prepaid Expense, Prepaid Revenue
+[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 6.1 | :repeat: | Multicurrency revaluation
 
 [//]: # (end addons)
 

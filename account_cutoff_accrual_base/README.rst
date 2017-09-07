@@ -8,7 +8,7 @@
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-7.svg)](http://erp7.zeroincombenze.it)
 
 
-[![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
+[![en](https://github.com/zeroincombenze/grymb/blob/master/flags/en_US.png)](https://www.facebook.com/groups/openerp.italia/)
 
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
 ================================================================
@@ -30,25 +30,34 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com>
 Installation
 ------------
 
+
 Configuration
 -------------
 
+
 Usage
+-----
+
 -----
 
 Known issues / Roadmap
 ----------------------
 
+
 Bug Tracker
 -----------
+
 
 Credits
 -------
 
 
+
 [![Odoo Italia Associazione]]
 
+
 ### Contributors
+
 
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
@@ -58,6 +67,8 @@ Credits
 ### Funders
 
 ### Maintainer
+
+
 
 
 .. image:: http://odoo-community.org/logo.png
