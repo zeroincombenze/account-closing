@@ -23,6 +23,7 @@ Installation
 
 
 
+
 To install this module, you need to:
 
 * clone the branch 9.0 of the repository https://github.com/OCA/account-closing
@@ -36,9 +37,12 @@ Configuration
 
 
 
+
 See the configuration in the module "Multicurrency revaluation"
 
 Usage
+-----
+
 -----
 
 -----
@@ -59,6 +63,7 @@ Known issues / Roadmap
 
 
 
+
 * The module depends on the module *base headers webkit* which is in work in
   progress in this pull request: https://github.com/OCA/webkit-tools/pull/10
 
@@ -73,15 +78,19 @@ Bug Tracker
 -----------
 
 
+
 Credits
 -------
+
 
 
 
 [![Odoo Italia Associazione]]
 
 
+
 ### Contributors
+
 
 
 
@@ -104,6 +113,8 @@ Credits
 ### Funders
 
 ### Maintainer
+
+
 
 
 
