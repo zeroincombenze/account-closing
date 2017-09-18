@@ -31,12 +31,16 @@ Installation
 
 
 
+
 Configuration
 -------------
 
 
 
+
 Usage
+-----
+
 -----
 
 -----
@@ -56,10 +60,12 @@ Known issues / Roadmap
 
 
 
+
 * Add the start/end date field on the Qweb invoice report.
 
 Bug Tracker
 -----------
+
 
 
 
@@ -75,11 +81,14 @@ Credits
 
 
 
+
 [![Odoo Italia Associazione]]
 
 
 
+
 ### Contributors
+
 
 
 
@@ -89,6 +98,8 @@ Credits
 ### Funders
 
 ### Maintainer
+
+
 
 
 
