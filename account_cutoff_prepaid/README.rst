@@ -34,8 +34,10 @@ Installation
 
 
 
+
 Configuration
 -------------
+
 
 
 
@@ -48,6 +50,8 @@ On the form view of the company, in the *Configuration* tab, there is a *Cut-off
 * the *Default Account for Prepaid Expense*.
 
 Usage
+-----
+
 -----
 
 -----
@@ -88,8 +92,10 @@ Known issues / Roadmap
 
 
 
+
 Bug Tracker
 -----------
+
 
 
 
@@ -107,12 +113,15 @@ Credits
 
 
 
+
 [![Odoo Italia Associazione]]
 
 
 
 
+
 ### Contributors
+
 
 
 
@@ -124,6 +133,8 @@ Credits
 ### Funders
 
 ### Maintainer
+
+
 
 
 
