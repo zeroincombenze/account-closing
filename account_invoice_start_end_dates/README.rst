@@ -15,6 +15,7 @@
    :alt: License: AGPL-3
 
 Invoice Start/End Dates
+=======================
 
 This module adds the fields *Start Date* and *End Date* on invoice lines. When you validate the invoice, the information is copied from invoice lines to account move lines (if you enabled the grouping option on the related journal, Odoo will not group invoice lines that have different start/end dates).
 
@@ -41,6 +42,8 @@ Configuration
 
 
 Usage
+-----
+
 -----
 
 -----
@@ -89,7 +92,6 @@ Credits
 
 
 
-[![Odoo Italia Associazione]]
 
 
 
