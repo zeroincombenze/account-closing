@@ -48,15 +48,11 @@ See the configuration in the module "Multicurrency revaluation"
 Usage
 -----
 
------
 
------
 
------
 
------
 
------
+
 
 =====
 
