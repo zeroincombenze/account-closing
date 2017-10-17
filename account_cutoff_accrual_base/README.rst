@@ -14,6 +14,7 @@
 =================
 
 Account Accrual Base
+====================
 
 This module contains objets, fields and menu entries that are used by other
 accrual modules. So you need to install other accrual modules to get the
@@ -43,13 +44,10 @@ Configuration
 Usage
 -----
 
------
 
------
 
------
 
------
+
 
 Known issues / Roadmap
 ----------------------
@@ -73,7 +71,6 @@ Credits
 
 
 
-[![Odoo Italia Associazione]]
 
 
 

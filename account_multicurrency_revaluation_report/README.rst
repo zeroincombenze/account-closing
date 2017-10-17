@@ -14,6 +14,7 @@
 =========================
 
 Multicurrency revaluation report
+================================
 
 This module was written to extend the functionality of the *Multicurrency
 revaluation* module for additional reports.
@@ -47,13 +48,10 @@ See the configuration in the module "Multicurrency revaluation"
 Usage
 -----
 
------
 
------
 
------
 
------
+
 
 =====
 
@@ -99,7 +97,6 @@ Credits
 
 
 
-[![Odoo Italia Associazione]]
 
 
 

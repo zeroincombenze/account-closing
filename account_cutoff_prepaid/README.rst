@@ -15,6 +15,7 @@
    :alt: License: AGPL-3
 
 Account Cutoff Prepaid
+======================
 
 This module allows you to easily compute the prepaid revenue and prepaid expenses and to generate the related cutoff journal items. It uses the **Start Date** and **End Date** fields of journal entries (copied from the same fields of invoice lines).
 
@@ -52,13 +53,10 @@ On the form view of the company, in the *Configuration* tab, there is a *Cut-off
 Usage
 -----
 
------
 
------
 
------
 
------
+
 
 =====
 
@@ -114,7 +112,6 @@ Credits
 
 
 
-[![Odoo Italia Associazione]]
 
 
 

@@ -15,6 +15,7 @@
    :alt: License: AGPL-3
 
 Account Cutoff Base
+===================
 
 This module contains objets, fields and menu entries that are used by
 other cut-off modules ; it doesn't provide useful features by itself. You
@@ -43,13 +44,10 @@ Configuration
 Usage
 -----
 
------
 
------
 
------
 
------
+
 
 =====
 
@@ -86,7 +84,6 @@ Credits
 
 
 
-[![Odoo Italia Associazione]]
 
 
 
