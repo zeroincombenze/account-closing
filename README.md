@@ -18,6 +18,8 @@
 
 
 
+
+
 [![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
 
 Account Closing
@@ -43,7 +45,7 @@ Unported addons
 addon | version | OCA version | summary
 --- | --- | --- | ---
 [account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 0.1 (unported) | :repeat: | Accrued Expense & Accrued Revenue from Pickings
-[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 8.0.1.0.0 (unported) | 10.0.1.0.0 | Manage revaluation for multicurrency environment
+[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 8.0.1.0.0 (unported) | 10.0.2.0.1 | Manage revaluation for multicurrency environment
 [account_multicurrency_revaluation_report](account_multicurrency_revaluation_report/) | 8.0.1.0.0 (unported) | :x: | Module for printing reports that completes the module Multicurrency Revaluation
 
 [//]: # (end addons)
