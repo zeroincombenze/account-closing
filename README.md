@@ -8,31 +8,63 @@
 [![try it](http://www.zeroincombenze.it/wp-content/uploads/ci-ct/prd/button-try-it-8.svg)](http://erp8.zeroincombenze.it)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [![en](http://www.shs-av.com/wp-content/en_US.png)](http://wiki.zeroincombenze.org/it/Odoo/7.0/man)
-================================================================================================
-================================================================================================
 
 Account Closing
+===============
 
 This project aim to deal with modules related to manage account closing.
 
 [//]: # (addons)
 
+
 Available addons
-addon | version | summary
---- | --- | ---
-[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 8.0.0.1.0 | Base module for accrued expenses and revenues
-[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 8.0.0.1.0 | Accrued Expense & Accrued Revenue from Pickings
-[account_cutoff_base](account_cutoff_base/) | 8.0.0.1.0 | Base module for Account Cut-offs
-[account_cutoff_prepaid](account_cutoff_prepaid/) | 8.0.0.1.0 | Prepaid Expense, Prepaid Revenue
-[account_invoice_accrual](account_invoice_accrual/) | 8.0.1.0.0 | Account invoice accrual
-[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 8.0.1.0.0 | Manage revaluation for multicurrency environment
+----------------
+addon | version | OCA version | summary
+--- | --- | --- | ---
+[account_cutoff_accrual_base](account_cutoff_accrual_base/) | 8.0.0.1.0 | :repeat: | Base module for accrued expenses and revenues
+[account_cutoff_accrual_picking](account_cutoff_accrual_picking/) | 8.0.0.1.0 | :repeat: | Accrued Expense & Accrued Revenue from Pickings
+[account_cutoff_base](account_cutoff_base/) | 8.0.0.1.0 | :repeat: | Base module for Account Cut-offs
+[account_cutoff_prepaid](account_cutoff_prepaid/) | 8.0.0.1.0 | :repeat: | Prepaid Expense, Prepaid Revenue
+[account_invoice_accrual](account_invoice_accrual/) | 8.0.1.0.0 | :repeat: | Account invoice accrual
+[account_multicurrency_revaluation](account_multicurrency_revaluation/) | 8.0.1.0.0 | :repeat: | Manage revaluation for multicurrency environment
 
 
 Unported addons
-addon | version | summary
---- | --- | ---
-[account_multicurrency_revaluation_report](account_multicurrency_revaluation_report/) | 8.0.1.0.0 (unported) | Module for printing reports that completes the module Multicurrency Revaluation
+---------------
+addon | version | OCA version | summary
+--- | --- | --- | ---
+[account_multicurrency_revaluation_report](account_multicurrency_revaluation_report/) | 8.0.1.0.0 (unported) | :repeat: | Module for printing reports that completes the module Multicurrency Revaluation
 
 [//]: # (end addons)
 
