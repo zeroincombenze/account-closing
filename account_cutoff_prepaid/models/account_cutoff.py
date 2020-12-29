@@ -12,10 +12,12 @@ class AccountCutoff(models.Model):
     @api.model
     def _get_default_source_journals(self):
         res = []
-        cutoff_type = self._context.get('type')
+        cutoff_type = self._context.get('default_type')
         mapping = {
             'prepaid_expense': 'purchase',
+            'accrued_expense': 'purchase',
             'prepaid_revenue': 'sale',
+            'accrued_revenue': 'sale',
             }
         if cutoff_type in mapping:
             src_journals = self.env['account.journal'].search(
@@ -27,7 +29,7 @@ class AccountCutoff(models.Model):
     source_journal_ids = fields.Many2many(
         'account.journal', column1='cutoff_id', column2='journal_id',
         string='Source Journals', readonly=True,
-        default=_get_default_source_journals,
+        default=lambda self: self._get_default_source_journals(),
         states={'draft': [('readonly', False)]})
     forecast = fields.Boolean(
         string='Forecast',
@@ -44,7 +46,6 @@ class AccountCutoff(models.Model):
         'A cut-off of the same type already exists with the same date(s) !'
         )]
 
-    @api.multi
     @api.constrains('start_date', 'end_date', 'forecast')
     def _check_start_end_dates(self):
         for prepaid in self:
@@ -55,13 +56,13 @@ class AccountCutoff(models.Model):
 
     @api.onchange('forecast')
     def forecast_onchange(self):
-        return {'warning': {
-            'title': _('Warning'),
-            'message': _(
-                "Don't forget to Re-Generate Lines after entering or "
-                "leaving forecast mode.")}}
+        if self.forecast:
+            return {'warning': {
+                'title': _('Warning'),
+                'message': _(
+                    "Don't forget to Re-Generate Lines after entering or "
+                    "leaving forecast mode.")}}
 
-    @api.multi
     def _prepare_prepaid_lines(self, aml, mapping):
         self.ensure_one()
         start_date_dt = fields.Date.from_string(aml.start_date)
@@ -87,8 +88,9 @@ class AccountCutoff(models.Model):
                 prepaid_days = (end_date_dt - cutoff_date_dt).days
         assert total_days > 0,\
             'Should never happen. Total days should always be > 0'
-        cutoff_amount = (aml.debit - aml.credit) *\
+        cutoff_amount = aml.balance *\
             prepaid_days / float(total_days)
+        cutoff_amount = self.company_currency_id.round(cutoff_amount)
         # we use account mapping here
         if aml.account_id.id in mapping:
             cutoff_account_id = mapping[aml.account_id.id]
@@ -113,9 +115,10 @@ class AccountCutoff(models.Model):
             }
         return res
 
-    @api.multi
-    def get_prepaid_lines(self):
-        self.ensure_one()
+    def get_lines(self):
+        res = super(AccountCutoff, self).get_lines()
+        if self.type not in ['prepaid_expense', 'prepaid_revenue']:
+            return res
         aml_obj = self.env['account.move.line']
         line_obj = self.env['account.cutoff.line']
         mapping_obj = self.env['account.cutoff.mapping']
@@ -123,8 +126,6 @@ class AccountCutoff(models.Model):
             raise UserError(
                 _("You should set at least one Source Journal."))
         cutoff_date_str = self.cutoff_date
-        # Delete existing lines
-        self.line_ids.unlink()
 
         if self.forecast:
             domain = [
@@ -148,13 +149,12 @@ class AccountCutoff(models.Model):
         # Loop on selected account move lines to create the cutoff lines
         for aml in amls:
             line_obj.create(self._prepare_prepaid_lines(aml, mapping))
-        return True
+        return res
 
     @api.model
-    def _inherit_default_cutoff_account_id(self):
-        account_id = super(AccountCutoff, self).\
-            _inherit_default_cutoff_account_id()
-        cutoff_type = self._context.get('type')
+    def _default_cutoff_account_id(self):
+        account_id = super(AccountCutoff, self)._default_cutoff_account_id()
+        cutoff_type = self._context.get('default_type')
         company = self.env.user.company_id
         if cutoff_type == 'prepaid_revenue':
             account_id = company.default_prepaid_revenue_account_id.id or False
@@ -175,8 +175,9 @@ class AccountCutoffLine(models.Model):
     start_date = fields.Date(string='Start Date', readonly=True)
     end_date = fields.Date(string='End Date', readonly=True)
     total_days = fields.Integer('Total Number of Days', readonly=True)
-    prepaid_days = fields.Integer(
-        string='Prepaid Days', readonly=True,
-        help="In regular mode, this is the number of days after the "
-        "cut-off date. In forecast mode, this is the number of days "
-        "between the start date and the end date.")
+    prepaid_days = fields.Integer(  # rename to cutoff_days after v10 ?
+        string='Cutoff Days', readonly=True,
+        help="On a prepaid revenue/expense, this is the number of days after "
+        "the cut-off date (in forecast mode, this is the number of days "
+        "between the start date and the end date). In accrued "
+        "revenue/expense, this is the number of days before the cut-off date.")

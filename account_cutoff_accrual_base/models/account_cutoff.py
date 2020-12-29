@@ -1,38 +1,21 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Account Cut-off Accrual Base module for OpenERP
-#    Copyright (C) 2013 Akretion (http://www.akretion.com)
-#    @author Alexis de Lattre <alexis.delattre@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2013-2019 Akretion France (http://www.akretion.com)
+# @author Alexis de Lattre <alexis.delattre@akretion.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
-from openerp import api, fields, models
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+from odoo.tools import float_is_zero
+import odoo.addons.decimal_precision as dp
 
 
 class AccountCutOff(models.Model):
     _inherit = 'account.cutoff'
 
     @api.model
-    def _inherit_default_cutoff_account_id(self):
-        account_id = super(AccountCutOff,
-                           self)._inherit_default_cutoff_account_id()
-        type = self.env.context.get('type')
+    def _default_cutoff_account_id(self):
+        account_id = super(AccountCutOff, self)._default_cutoff_account_id()
+        type = self.env.context.get('default_type')
         company = self.env.user.company_id
         if type == 'accrued_expense':
             account_id = company.default_accrued_expense_account_id.id or False
@@ -42,18 +25,49 @@ class AccountCutOff(models.Model):
 
     @api.model
     def _get_default_journal(self):
-        journal_id = super(AccountCutOff, self)\
-            ._get_default_journal()
-        cutoff_type = self.env.context.get('type', False)
-        default_journal_id = self.env.user.company_id\
-            .default_cutoff_journal_id.id or False
+        journal = super(AccountCutOff, self)._get_default_journal()
+        cutoff_type = self.env.context.get('default_type')
+        company = self.env.user.company_id
+        default_journal = company.default_cutoff_journal_id
         if cutoff_type == 'accrued_expense':
-            journal_id = self.env.user.company_id\
-                .default_accrual_expense_journal_id.id or default_journal_id
+            journal = company.default_accrual_expense_journal_id or\
+                default_journal
         elif cutoff_type == 'accrued_revenue':
-            journal_id = self.env.user.company_id\
-                .default_accrual_revenue_journal_id.id or default_journal_id
-        return journal_id
+            journal = company.default_accrual_revenue_journal_id or\
+                default_journal
+        return journal
+
+    def _prepare_tax_lines(self, tax_compute_all_res, currency):
+        res = []
+        ato = self.env['account.tax']
+        company_currency = self.company_id.currency_id
+        cur_rprec = company_currency.rounding
+        for tax_line in tax_compute_all_res['taxes']:
+            tax = ato.browse(tax_line['id'])
+            if float_is_zero(tax_line['amount'], precision_rounding=cur_rprec):
+                continue
+            if self.type == 'accrued_expense':
+                tax_accrual_account_id = tax.account_accrued_expense_id.id
+                tax_account_field_label = _('Accrued Expense Tax Account')
+            elif self.type == 'accrued_revenue':
+                tax_accrual_account_id = tax.account_accrued_revenue_id.id
+                tax_account_field_label = _('Accrued Revenue Tax Account')
+            if not tax_accrual_account_id:
+                raise UserError(_(
+                    "Missing '%s' on tax '%s'.") % (
+                        tax_account_field_label, tax.display_name))
+            tax_amount = currency.round(tax_line['amount'])
+            tax_accrual_amount = currency.with_context(
+                date=self.cutoff_date).compute(tax_amount, company_currency)
+            res.append((0, 0, {
+                'tax_id': tax_line['id'],
+                'base': tax_line['base'],  # in currency
+                'amount': tax_amount,  # in currency
+                'sequence': tax_line['sequence'],
+                'cutoff_account_id': tax_accrual_account_id,
+                'cutoff_amount': tax_accrual_amount,  # in company currency
+                }))
+        return res
 
 
 class AccountCutoffLine(models.Model):
@@ -61,7 +75,7 @@ class AccountCutoffLine(models.Model):
 
     quantity = fields.Float(
         string='Quantity',
-        digits=dp.get_precision('Product UoS'),
+        digits=dp.get_precision('Product Unit of Measure'),
         readonly=True)
     price_unit = fields.Float(
         string='Unit Price',
