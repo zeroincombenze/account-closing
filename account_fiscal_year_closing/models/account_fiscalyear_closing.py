@@ -459,6 +459,7 @@ class AccountFiscalyearClosingConfig(models.Model):
             'ref': description,
             'date': self.date,
             'fyc_id': self.fyc_id.id,
+            'move_type': 'other',
             'closing_type': self.move_type,
             'journal_id': journal_id,
             'line_ids': [(0, 0, m) for m in move_lines],
@@ -477,6 +478,7 @@ class AccountFiscalyearClosingConfig(models.Model):
             ], order="code ASC")
             for account in src_accounts:
                 closing_type = self.closing_type_get(account)
+                balance = False
                 if closing_type == 'balance':
                     # Get all lines
                     lines = account_map.account_lines_get(account)
@@ -599,21 +601,23 @@ class AccountFiscalyearClosingMapping(models.Model):
         date = self.fyc_config_id.fyc_id.date_end
         if self.fyc_config_id.move_type == 'opening':
             date = self.fyc_config_id.fyc_id.date_opening
-        if account_lines:
+            if account_lines:
+                balance = (
+                        sum(account_lines.mapped('credit')) -
+                        sum(account_lines.mapped('debit')))
+        elif account_lines:
             balance = (
                 sum(account_lines.mapped('debit')) -
                 sum(account_lines.mapped('credit')))
-            if not float_is_zero(balance, precision_digits=precision):
-                move_line = {
-                    'account_id': account.id,
-                    'debit': balance < 0 and -balance,
-                    'credit': balance > 0 and balance,
-                    'name': description,
-                    'date': date,
-                    'partner_id': partner_id,
-                }
-            else:
-                balance = 0
+        if not float_is_zero(balance, precision_digits=precision):
+            move_line = {
+                'account_id': account.id,
+                'debit': balance < 0 and -balance,
+                'credit': balance > 0 and balance,
+                'name': description,
+                'date': date,
+                'partner_id': partner_id,
+            }
         return balance, move_line
 
     @api.multi

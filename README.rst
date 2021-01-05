@@ -1,14 +1,8 @@
 
 =====================================
-|icon| Fiscal year closing 10.0.1.0.1
+|Zeroincombenze| account-closing 10.0
 =====================================
-
-
-**Generic fiscal year closing wizard**
-
-.. |icon| image:: https://raw.githubusercontent.com/zeroincombenze/account-closing/10.0/account_fiscal_year_closing/static/description/icon.png
-
-|Maturity| |Build Status| |Codecov Status| |license gpl| |Try Me|
+|Build Status| |Codecov Status| |license gpl| |Try Me|
 
 
 .. contents::
@@ -17,46 +11,41 @@
 Overview / Panoramica
 =====================
 
-|en| This module implements a generic fiscal year closing system for those
-countries where closing/opening moves or other kind of closing operations are
-mandatory in accounting books.
+|en| N/A
 
-It includes a template mechanism that can be used in localizations for
-providing the possible configurations to be used by the closing engine.
+|it| N/D
+Avaiable Addons / Moduli disponibili
+------------------------------------
 
-
-|
-
-|it| Chiusura e riapertura contabile
-
-Modulo di chiusura e riapertura contabile.
-
-
-|
-
-Usage / Utilizzo
-----------------
-
-For closing a fiscal year:
-
-#. Go to *Accounting > Adviser > Fiscal year closings*
-#. Click on create.
-#. Select the year for which you want to perform the closing. If your fiscal
-   year doesn't coincide with a natural year, input the last year of both of
-   the involved years.
-#. Select the closing template you want to use.
-#. Click on "Calculate".
-#. Check the result clicking on the "Show Moves" or "Show Move Lines" buttons.
-#. If everything is OK, then click on "Confirm and post moves" for finishing
-   the closing, posting and reconciling the journal entries.
-#. You can cancel the closing in any moment pressing "Cancel" button, which
-   unreconciles and removes closing journal entries.
-#. If one of the created journal entries is unbalanced, as Odoo doesn't allow
-   to create unbalanced entries, a new screen will be shown for checking the
-   problem on the created entry.
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| Name / Nome                          | Version    | OCA Ver.   | Description / Descrizione                                                        |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_cutoff_accrual_base          | 10.0.1.1.0 | |same|     | Base module for accrued expenses and revenues                                    |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_cutoff_accrual_dates         | 10.0.1.1.0 | |same|     | Accrued expenses and revenues based on start/end dates                           |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_cutoff_accrual_picking       | |halt|     | |halt|     | Accrued Expense & Accrued Revenue from Pickings                                  |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_cutoff_accrual_subscription  | 10.0.1.0.0 | |same|     | Accrued expenses based on subscriptions                                          |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_cutoff_base                  | 10.0.1.1.0 | |same|     | Base module for Account Cut-offs                                                 |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_cutoff_prepaid               | 10.0.1.1.0 | |same|     | Prepaid Expense, Prepaid Revenue                                                 |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_fiscal_year_closing          | 10.0.1.0.1 | 10.0.1.0.0 | Generic fiscal year closing wizard                                               |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_invoice_accrual              | 10.0.1.1.0 | |same|     | Account invoice accrual                                                          |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_invoice_accrual_merge        | 10.0.1.0.0 | |same|     | Account invoice accrual merge                                                    |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_invoice_start_end_dates      | 10.0.1.0.0 | |same|     | Adds start/end dates on invoice lines and move lines                             |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_multicurrency_revaluation    | 10.0.2.1.0 | |same|     | Manage revaluation for multicurrency environment                                 |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
+| account_multicurrency_revaluation_re | |halt|     | |no_check| | Module for printing reports that completes the module Multicurrency Revaluation  |
++--------------------------------------+------------+------------+----------------------------------------------------------------------------------+
 
 
-|
 
 OCA comparation / Confronto con OCA
 -----------------------------------
@@ -69,8 +58,6 @@ OCA comparation / Confronto con OCA
 +-----------------------------------------------------------------+-------------------+----------------+--------------------------------+
 
 
-|
-|
 
 Getting started / Come iniziare
 ===============================
@@ -78,7 +65,13 @@ Getting started / Come iniziare
 |Try Me|
 
 
-|
+Prerequisites / Prerequisiti
+----------------------------
+
+
+* python 2.7+ (best 2.7.5+)
+* postgresql 9.2+ (best 9.5)
+
 
 Installation / Installazione
 ----------------------------
@@ -118,60 +111,7 @@ Installation / Installazione
     odoo_install_repository account-closing -b 10.0 -O zero -o $HOME/10.0
     vem create $HOME/10.0/venv_odoo -O 10.0 -a "*" -DI -o $HOME/10.0
 
-From UI: go to:
 
-* |menu| Setting > Activate Developer mode 
-* |menu| Apps > Update Apps List
-* |menu| Setting > Apps |right_do| Select **account_fiscal_year_closing** > Install
-
-
-|
-
-Configuration / Configurazione
-------------------------------
-
-If you want to add a closing template or check existing ones:
-
-#. Go to *Accounting > Configuration > Fiscal year closing > Closing templates*.
-#. Click on Create.
-#. Put a name for the template.
-#. Mark if you want to check if there's any draft move in the date range
-   before making the closing operations.
-#. Select the chart templates for which companies that have this chart you want
-   this template to be available for.
-#. Add one line for each of the journal entries you want to create on the
-   closing operation.
-#. This line has a name, a code, an optional journal (selectable per company),
-   a sequence for ordering this line with the others, and the type we want to
-   assign on the resulting journal entry created.
-#. Then you can configure accounts for being mapped on the section
-   "Accounts mapping".
-#. If you put a destination account on each mapping line, then the balance of
-   the source account will be transferred to that account.
-#. If there's no destination account, then the balance of the account will be
-   nullified through one or several journal items with the opposite balance.
-#. The way these opposite journal items will be created is determined by the
-   closing type in the section "Account closing types":
-
-   * Balance: There will be only one journal item with the opposite balance.
-   * Un-reconciled: The opposite balance will be grouped by the partner field
-     in the period journal entries.
-
-#. There's a default closing type to use, and you can specify others by
-   account type.
-#. You can configure a closing operation for being the reverse move of another
-   previous move generated by a closing operation (typically, the opening
-   move after the closing one). For making that, fill the "Inverse config"
-   field with the code of the closing operation you want to reverse, and
-   place this operation after that one (not necessarily immediately after).
-#. If you also want to reconcile the balances of the inverted journal items and
-   the initial ones, click on the check "Reconcile".
-
-You can check l10n_es_account_fiscal_year_closing in OCA/l10n-spain for several
-examples of closing templates.
-
-
-|
 
 Upgrade / Aggiornamento
 -----------------------
@@ -197,23 +137,14 @@ Upgrade / Aggiornamento
     # Adjust following statements as per your system
     sudo systemctl restart odoo
 
-From UI: go to:
-
-* |menu| Setting > Activate Developer mode
-* |menu| Apps > Update Apps List
-* |menu| Setting > Apps |right_do| Select **account_fiscal_year_closing** > Update
-
-|
 
 Support / Supporto
 ------------------
 
 
-|Zeroincombenze| This module is maintained by the `SHS-AV s.r.l. <https://www.zeroincombenze.it/>`__
+|Zeroincombenze| This project is mainly maintained by the `SHS-AV s.r.l. <https://www.zeroincombenze.it/>`__
 
 
-|
-|
 
 Get involved / Ci mettiamo in gioco
 ===================================
@@ -228,22 +159,10 @@ Proposals for enhancement
 -------------------------
 
 
-|en| If you have a proposal to change this module, you may want to send an email to <cc@shs-av.com> for initial feedback.
+|en| If you have a proposal to change on oh these modules, you may want to send an email to <cc@shs-av.com> for initial feedback.
 An Enhancement Proposal may be submitted if your idea gains ground.
 
-|it| Se hai proposte per migliorare questo modulo, puoi inviare una mail a <cc@shs-av.com> per un iniziale contatto.
-
-ChangeLog History / Cronologia modifiche
-----------------------------------------
-
-10.0.1.0.1 (2021-01-04)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* [FIX] Opening move with revert sign / Movimento di apertura con segno invertito rispetto a chiusura
-
-
-|
-|
+|it| Se hai proposte per migliorare uno dei moduli, puoi inviare una mail a <cc@shs-av.com> per un iniziale contatto.
 
 Credits / Didascalie
 ====================
@@ -253,31 +172,6 @@ Copyright
 
 Odoo is a trademark of `Odoo S.A. <https://www.odoo.com/>`__ (formerly OpenERP)
 
-
-
-|
-
-Authors / Autori
-----------------
-
-* `Tecnativa S. L. <https://www.tecnativa.com/>`__
-* `SHS-AV s.r.l. <https://www.zeroincombenze.it/>`__
-
-Contributors / Collaboratori
-----------------------------
-
-* Antonio Espinosa <antonio.espinosa@tecnativa.com>
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* Antonio Maria Vigliotti <antoniomaria.vigliotti@gmail.com>
-
-
-Maintainer / Manutenzione
--------------------------
-
-
-
-
-|
 
 ----------------
 
@@ -297,7 +191,6 @@ La distribuzione `Zeroincombenze® <https://wiki.zeroincombenze.org/en/Odoo>`__ 
 
 |
 
-This module is part of account-closing project.
 
 Last Update / Ultimo aggiornamento: 2021-01-04
 
