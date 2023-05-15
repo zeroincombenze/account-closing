@@ -601,14 +601,15 @@ class AccountFiscalyearClosingMapping(models.Model):
         date = self.fyc_config_id.fyc_id.date_end
         if self.fyc_config_id.move_type == 'opening':
             date = self.fyc_config_id.fyc_id.date_opening
-            if account_lines:
+        if account_lines:
+            if self.fyc_config_id.move_type == 'opening':
                 balance = (
-                        sum(account_lines.mapped('credit')) -
-                        sum(account_lines.mapped('debit')))
-        elif account_lines:
-            balance = (
-                sum(account_lines.mapped('debit')) -
-                sum(account_lines.mapped('credit')))
+                    sum(account_lines.mapped('credit')) -
+                    sum(account_lines.mapped('debit')))
+            else:
+                balance = (
+                    sum(account_lines.mapped('debit')) -
+                    sum(account_lines.mapped('credit')))
         if not float_is_zero(balance, precision_digits=precision):
             move_line = {
                 'account_id': account.id,
