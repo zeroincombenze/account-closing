@@ -453,6 +453,7 @@ class AccountFiscalyearClosingConfig(models.Model):
             'ref': description,
             'date': self.date,
             'fyc_id': self.fyc_id.id,
+            'move_type': 'other',
             'closing_type': self.move_type,
             'journal_id': journal_id,
             'line_ids': [(0, 0, m) for m in move_lines],
@@ -594,20 +595,23 @@ class AccountFiscalyearClosingMapping(models.Model):
         if self.fyc_config_id.move_type == 'opening':
             date = self.fyc_config_id.fyc_id.date_opening
         if account_lines:
-            balance = (
-                sum(account_lines.mapped('debit')) -
-                sum(account_lines.mapped('credit')))
-            if not float_is_zero(balance, precision_digits=precision):
-                move_line = {
-                    'account_id': account.id,
-                    'debit': balance < 0 and -balance,
-                    'credit': balance > 0 and balance,
-                    'name': description,
-                    'date': date,
-                    'partner_id': partner_id,
-                }
+            if self.fyc_config_id.move_type == 'opening':
+                balance = (
+                    sum(account_lines.mapped('credit')) -
+                    sum(account_lines.mapped('debit')))
             else:
-                balance = 0
+                balance = (
+                    sum(account_lines.mapped('debit')) -
+                    sum(account_lines.mapped('credit')))
+        if not float_is_zero(balance, precision_digits=precision):
+            move_line = {
+                'account_id': account.id,
+                'debit': balance < 0 and -balance,
+                'credit': balance > 0 and balance,
+                'name': description,
+                'date': date,
+                'partner_id': partner_id,
+            }
         return balance, move_line
 
     @api.multi

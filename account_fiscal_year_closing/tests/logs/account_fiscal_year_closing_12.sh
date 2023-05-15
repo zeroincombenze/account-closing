@@ -1,0 +1,1 @@
+cd /home/odoo/12.0; /home/odoo/12.0/odoo-bin --stop-after-init -d test_account_fiscal_year_closing_12 --config=/home/odoo/12.0/account-closing/account_fiscal_year_closing/tests/logs/zero12.account-closing.account_fiscal_year_closing.conf --log-level=error -i account,analytic,base,base_setup,bus,decimal_precision,digest,http_routing,mail,portal,product,uom,web,web_tour
