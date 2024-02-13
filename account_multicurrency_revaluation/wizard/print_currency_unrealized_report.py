@@ -1,54 +1,75 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Guewen Baconnier, Yannick Vaucher
-#    Copyright 2012 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
-from openerp.osv import fields, orm
+# Copyright 2012-2018 Camptocamp SA
+# Copyright 2020 CorporateHub (https://corporatehub.eu)
+# Copyright 2022 ForgeFlow S.L. (https://www.forgeflow.com)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-class UnrealizedCurrencyReportPrinter(orm.TransientModel):
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError, ValidationError
+
+
+class UnrealizedCurrencyReportPrinter(models.TransientModel):
     _name = "unrealized.report.printer"
+    _description = "Unrealized Currency Report Printer"
 
-    _columns = {
-        'chart_account_id': fields.many2one(
-            'account.account', 'Chart root',
-            domain=[('parent_id', '=', False)],
-            required=True),
-        'period_id': fields.many2one(
-            'account.period', 'Period to use', required=True),
-    }
+    account_ids = fields.Many2many(
+        "account.account",
+        string="Accounts",
+        domain=[("currency_revaluation", "=", True)],
+        default=lambda self: self._default_account_ids(),
+    )
+    start_date = fields.Date(
+        string="Start Date",
+        help="The report will print from this Date, all the revaluated entries"
+        " created from this date. The default value will be the first day of the month",
+        default=lambda self: self._default_start_date(),
+    )
+    end_date = fields.Date(
+        string="End Date",
+        help="The report will print till this Date. The default value will be today.",
+        required=True,
+        default=lambda self: self._default_end_date(),
+    )
+    only_include_posted_entries = fields.Boolean(
+        string="Only Include Posted Entries", default=False,
+    )
 
-    def print_report(self, cursor, uid, wid, data, context=None):
+    def _default_account_ids(self):
+        account_model = self.env["account.account"]
+        company = self.env.company
+        account_ids = account_model.search(
+            [("currency_revaluation", "=", True), ("company_id", "=", company.id)]
+        ).ids
+        return [(6, 0, account_ids)]
+
+    @api.onchange("start_date", "end_date")
+    def _onchange_dates(self):
+        self.ensure_one()
+        if self.start_date and self.end_date and self.start_date > self.end_date:
+            raise UserError(_("The Start Date cannot be higher than the End Date."))
+
+    def _default_start_date(self):
+        return fields.Date.today().replace(day=1)
+
+    def _default_end_date(self):
+        return fields.Date.today()
+
+    def print_report(self):
         """
         Show the report
         """
-        context = context or {}
-        # we update form with display account value
-        if isinstance(wid, list):
-            wid = wid[0]
-        current = self.browse(cursor, uid, wid, context=context)
-        form = {}
-        form['period_id'] = current.period_id.id
-        form['period_name'] = current.period_id.name
-        form['account_ids'] = [current.chart_account_id.id]
-        data['form'] = form
-
-        return {'type': 'ir.actions.report.xml',
-                'report_name': 'currency_unrealized',
-                'datas': data}
+        if self.account_ids:
+            data = {
+                "start_date": self.start_date,
+                "end_date": self.end_date,
+                "only_include_posted_entries": self.only_include_posted_entries,
+                "account_ids": self.account_ids.ids,
+            }
+            # in Odoo 11 we no longer call render, but report_action
+            # config should be false as otherwise it will call configuration
+            # wizard that works weirdly
+            return self.env.ref(
+                "account_multicurrency_revaluation." "action_report_currency_unrealized"
+            ).report_action(docids=[], data=data, config=False)
+        else:
+            raise ValidationError(_("Please, select the accounts!"))
